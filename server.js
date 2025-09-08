@@ -7,6 +7,7 @@ import morgan from "morgan";
 import authRoutes from './Routes/auth.js';
 import usersRoutes from './Routes/users.js';
 import petsRoutes from './Routes/pets.js';
+import dogRoutes from './Routes/dog.js';
 import appointmentsRoutes from './Routes/appointments.js';
 import dotenv from "dotenv";
 import db from './db.js';
@@ -22,7 +23,7 @@ app.use(morgan("dev"));
 
 // localhost:5000
 
-
+//
 
 // app.use("/users", usersRoutes);
 // app.use("/pets", petsRoutes);
@@ -31,9 +32,13 @@ app.use(morgan("dev"));
 app.use("/api/auth", authRoutes);
 app.use("/api/appointments", appointmentsRoutes);
 app.use("/api/users", usersRoutes)
+app.use("/api", dogRoutes)
 app.get("/", (req, res) => {
     res.send("✅ API is running");
 });
+
+
+
 
 db.connect().then(() => {
     app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

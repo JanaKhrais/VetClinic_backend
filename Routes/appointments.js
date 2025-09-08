@@ -1,6 +1,7 @@
 
 import express from "express";
 import db from "../db.js";
+
 import adminAuth from "../middleware/adminAuth.js";
 
 const router = express.Router();
@@ -157,8 +158,6 @@ router.delete("/:id", requireAdmin, async (req, res) => {
         res.status(500).send("Error deleting appointment");
     }
 });
-
-
 
 
 
