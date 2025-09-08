@@ -27,15 +27,20 @@ node server.js
 
 ## 📂 Project Structure
 vetclinic_backend/
-│── Routes/
-│   ├── auth.js          # Login & signup
-│   ├── users.js         # User routes
-│   ├── appointments.js  # Appointment CRUD + admin actions
+
+│- Routes/
+│   
+├──   |-auth.js          
+│   
+├──   |-users.js         
+│   
+├──   |-appointments.js  
 │── middleware/
-│   └── adminAuth.js     # Middleware for admin-only access
-│── db.js                # PostgreSQL connection
-│── server.js            # Express app entry point
-│── .env                 # Environment variables (DATABASE_URL, PORT)
+│   └── adminAuth.js     
+│── db.js                
+│── server.js            
+│── .env                 
+
 
 
 ## 📡 API Endpoints
