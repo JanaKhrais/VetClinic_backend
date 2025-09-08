@@ -1,14 +1,11 @@
-// backend/routes/appointments.js
+
 import express from "express";
 import db from "../db.js";
 import adminAuth from "../middleware/adminAuth.js";
 
 const router = express.Router();
 
-// ================================
-// Get all appointments (admin view)
-// GET /api/appointments
-// ================================
+
 router.get("/", adminAuth, async (req, res) => {
     try {
         const result = await db.query("SELECT * FROM appointments ORDER BY date");
@@ -19,10 +16,7 @@ router.get("/", adminAuth, async (req, res) => {
     }
 });
 
-// ================================
-// Get all appointments for a specific user
-// GET /api/appointments/user/:user_id
-// ================================
+
 router.get("/user/:user_id", async (req, res) => {
     const { user_id } = req.params;
     try {
@@ -37,27 +31,7 @@ router.get("/user/:user_id", async (req, res) => {
     }
 });
 
-// ================================
-// Book a new appointment
-// POST /api/appointments
-// ================================
-// router.post("/", async (req, res) => {
-//     const { user_id, mobile_number, date } = req.body;
-//     if (!user_id || !mobile_number || !date) {
-//         return res.status(400).json({ error: "Missing required fields" });
-//     }
 
-//     try {
-//         const result = await db.query(
-//             "INSERT INTO appointments (user_id, mobile_number, date) VALUES ($1, $2, $3) RETURNING *",
-//             [user_id, mobile_number, date]
-//         );
-//         res.status(201).json(result.rows[0]);
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json({ error: "Database error" });
-//     }
-// });
 router.post("/", async (req, res) => {
     const { user_id, mobile_number, date } = req.body;
     if (!user_id || !mobile_number || !date) {
@@ -75,10 +49,7 @@ router.post("/", async (req, res) => {
         res.status(500).json({ error: "Database error" });
     }
 });
-// ================================
-// Update an appointment
-// PUT /api/appointments/:id
-// ================================
+
 router.put("/:id", async (req, res) => {
     const { mobile_number, date, status } = req.body;
 
@@ -116,10 +87,7 @@ router.delete("/user/:id", async (req, res) => {
         res.status(500).json({ error: "Database error" });
     }
 });
-// ================================
-// Delete an appointment
-// DELETE /api/appointments/:id
-// ================================
+
 router.delete("/:id", adminAuth, async (req, res) => {
     try {
         const result = await db.query(
@@ -142,10 +110,7 @@ router.delete("/:id", adminAuth, async (req, res) => {
 
 
 
-
-
-
-// Middleware: check if user is admin
+// Middleware check if user is admin or not
 const requireAdmin = (req, res, next) => {
     const role = req.headers["x-role"]; // or from auth middleware
     if (role !== "admin") {
@@ -154,7 +119,7 @@ const requireAdmin = (req, res, next) => {
     next();
 };
 
-// ✅ Admin: Get all appointments
+//admin can Get all appointments
 router.get("/", requireAdmin, async (req, res) => {
     try {
         const result = await db.query(
@@ -167,7 +132,7 @@ router.get("/", requireAdmin, async (req, res) => {
     }
 });
 
-// ✅ Admin: Update appointment status (approve/decline)
+// Update appointment status approve or decline for admin
 router.put("/:id/status", requireAdmin, async (req, res) => {
     const { status } = req.body;
     try {
@@ -182,7 +147,7 @@ router.put("/:id/status", requireAdmin, async (req, res) => {
     }
 });
 
-// ✅ Admin: Delete appointment
+//admin delete the appointment 
 router.delete("/:id", requireAdmin, async (req, res) => {
     try {
         await db.query("DELETE FROM appointments WHERE id = $1", [req.params.id]);

@@ -2,9 +2,7 @@ import express from "express";
 import db from "../db.js";
 const router = express.Router();
 
-// localhost:5000/api/auth/signup
-// POST
-// body >> { email, password, role }
+
 router.post("/signup", async (req, res) => {
     const { email, password, role } = req.body;
     const exists = await db.query("SELECT * FROM users WHERE email = $1", [email]);

@@ -10,9 +10,6 @@ router.get("/", async (req, res) => {
     res.json(result.rows);
 });
 
-// localhost:5000/api/products/
-// body name price, header x-role
-
 
 
 router.post("/", adminAuth, async (req, res) => {

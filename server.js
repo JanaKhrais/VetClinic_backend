@@ -38,27 +38,3 @@ app.get("/", (req, res) => {
 db.connect().then(() => {
     app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 })
-
-
-
-
-//delete it
-// // Test DB connection
-// app.get("/test-db", async (req, res) => {
-//     try {
-//         const result = await db.query("SELECT NOW()");
-//         res.json({ success: true, time: result.rows[0] });
-//     } catch (err) {
-//         console.error("❌ Database error:", err.message);
-//         res.status(500).json({ success: false, error: err.message });
-//     }
-// });
-
-
-// app.get("/test", (request, response) =>
-//     response.json({ test: "test" }));
-
-
-// app.listen(PORT, () => {
-//     console.log('listen!');
-// })ac
