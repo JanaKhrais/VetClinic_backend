@@ -5,8 +5,6 @@ const router = express.Router();
 
 
 
-
-
 router.post("/users", async (req, res) => {
 
 
